@@ -90,12 +90,12 @@ class TestDBStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
         """test that new adds an object to the database"""
-        state_data = ["name": "Lagos"}
+        state_data = {"name": "Lagos"}
         new_state = State(**state_data)
 
-	models.storage.new(new_state)
+        models.storage.new(new_state)
 
-	session = models.storage._DBStorage__session
+        session = models.storage._DBStorage__session
 
         retrieved_state = session.query(State).filter_by(id=new_state.id).first()
 
@@ -150,7 +150,7 @@ class TestDBStorage(unittest.TestCase):
         state_data = {"name": "Carlifonia"}
         state_instance = State(**state_data)
         storage.new(state_instance)
-	storage.save()
+        storage.save()
 
         city_data = {"name": "Los Angeles", "state_id": state_instance.id}
 
